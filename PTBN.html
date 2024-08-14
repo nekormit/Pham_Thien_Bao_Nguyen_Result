@@ -1,0 +1,255 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pitching Session Results</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 100px;
+            height: 100px;
+            background: #f0f0f0;
+            transform: rotate(45deg);
+        }
+        .card::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 100px;
+            height: 100px;
+            background: #f0f0f0;
+            transform: rotate(45deg);
+        }
+        .card-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #333;
+            padding-bottom: 1rem;
+        }
+        .card-header h2 {
+            font-family: 'Playfair Display', serif;
+            color: #333;
+            margin: 0;
+            font-weight: 700;
+            font-size: 1.8rem;
+        }
+        .user-info {
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        .user-info.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .user-info p {
+            margin: 0.5rem 0;
+            color: #555;
+        }
+        .scores {
+            margin-bottom: 1.5rem;
+        }
+        .score-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px dashed #ccc;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        .score-item.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .score-item span:first-child {
+            color: #555;
+            font-weight: 500;
+        }
+        .score-item span:last-child {
+            font-weight: 700;
+            color: #333;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        .score-item span:last-child.show {
+            opacity: 1;
+        }
+        .total-score {
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #333;
+            border-top: 2px solid #333;
+            border-bottom: 2px solid #333;
+            padding: 0.5rem 0;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        .total-score.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .qualification {
+            text-align: center;
+            font-weight: 500;
+            color: #dc3545;
+            position: relative;
+            padding: 10px;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        .qualification.show {
+            opacity: 1;
+        }
+        .qualification::before,
+        .qualification::after {
+            content: '\2022';
+            font-size: 1.5rem;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .qualification::before {
+            left: 0;
+        }
+        .qualification::after {
+            right: 0;
+        }
+        .not-qualified {
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="card-header">
+            <h2>RMIT SAT Hanoi Trainees Recruitment 2024B Pitching Session Results</h2>
+        </div>
+        <div class="user-info">
+            <p><strong>Name:</strong> Phạm Thiên Bảo Nguyên</p>
+            <p><strong>Team:</strong> 2</p>
+        </div>
+        <div class="scores">
+            <div class="score-item">
+                <span>Problems-solving & Critical Thinking:</span>
+                <span>16.5/30</span>
+            </div>
+            <div class="score-item">
+                <span>Research & Rationale</span>
+                <span>4/10</span>
+            </div>
+            <div class="score-item">
+                <span>Oral Presentation Skills</span>
+                <span>5.5/10</span>
+            </div>
+            <div class="score-item">
+                <span>Technical Skills</span>
+                <span>13/20</span>
+            </div>
+            <div class="score-item">
+                <span>Team-work</span>
+                <span>11/30</span>
+            </div>
+        </div>
+        <div class="total-score">
+            Total Score: 100/100
+        </div>
+        <div class="qualification">
+            Thank you for your effort and participation, but unfortunately cannot offer you the position.</div>
+    </div>
+
+    <script>
+        function showElementsSequentially() {
+            const userInfo = document.querySelector('.user-info');
+            const scoreItems = document.querySelectorAll('.score-item');
+            const scoreValues = document.querySelectorAll('.score-item span:last-child');
+            const totalScore = document.querySelector('.total-score');
+            const qualification = document.querySelector('.qualification');
+
+            let delay = 0;
+            const intervalDelay = 3000; // 2 seconds
+
+            // Show user info first
+            userInfo.classList.add('show');
+
+            // Show score items (criteria) after 5 seconds
+            setTimeout(() => {
+                scoreItems.forEach((item, index) => {
+                    setTimeout(() => {
+                        item.classList.add('show');
+                    }, index * 500);
+                });
+
+                // Then show score values after 2 seconds
+                setTimeout(() => {
+                    scoreValues.forEach((value, index) => {
+                        setTimeout(() => {
+                            value.classList.add('show');
+                        }, index * 500);
+                    });
+                }, 3000);
+
+                // Show total score
+                setTimeout(() => {
+                    totalScore.classList.add('show');
+                }, 6000);
+
+                // Show qualification
+                setTimeout(() => {
+                    qualification.classList.add('show');
+                }, 7000);
+            }, 5000);
+        }
+
+        // Calculate total score
+        const scoreItems = document.querySelectorAll('.score-item span:last-child');
+        let totalScore = 0;
+        scoreItems.forEach(item => {
+            totalScore += parseFloat(item.textContent);
+        });
+
+        // Update total score
+        document.querySelector('.total-score').textContent = `Total Score: ${totalScore.toFixed(1)}`;
+
+        // Check qualification
+        const qualificationElement = document.querySelector('.qualification');
+        if (totalScore < 30) {
+            qualificationElement.textContent = "We regret to inform you that you have not qualified for the program.";
+            qualificationElement.classList.add('not-qualified');
+        }
+
+        // Start the sequential display after a short delay
+        setTimeout(showElementsSequentially, 500);
+    </script>
+</body>
+</html>
